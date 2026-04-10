@@ -1,7 +1,4 @@
--- Run this in pgAdmin on your 'rest' database if you get:
--- column "user_id" of relation "orders" does not exist
 
--- Add user_id column to orders (if it doesn't exist)
 DO $$
 BEGIN
   IF NOT EXISTS (

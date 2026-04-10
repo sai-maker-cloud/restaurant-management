@@ -1,7 +1,4 @@
--- Run this in pgAdmin on your 'rest' database if you get:
--- column "menu_id" of relation "order_items" does not exist
 
--- Add missing columns to order_items (if they don't exist)
 DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'order_items' AND column_name = 'order_id') THEN
