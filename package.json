@@ -2,6 +2,10 @@
   "name": "restaurant-management",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm start --prefix backend"
+  },
   "dependencies": {
     "serverless-http": "^3.2.0"
   }

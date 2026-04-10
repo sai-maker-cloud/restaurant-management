@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import pool from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
@@ -7,6 +9,9 @@ import menuRoutes from "./routes/menuRoutes.js";
 import inventoryRoutes from "./routes/inventoryRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentroutes from "./routes/paymentRoutes.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -27,5 +32,12 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payment", paymentroutes);
+
+// Serve static frontend in production
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 export { app };
